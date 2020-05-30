@@ -6,7 +6,7 @@
                 <p class="headline text-center">Selecciona tus cartas {{ player1.name }}</p>
                 <CardsList />
             </v-col>
-            <v-col cols="6">
+            <v-col cols="3" offset-sm="1">
                 <p class="headline text-center">Vista previa</p>
                 <MyTable :cards="player1.cards"/>
             </v-col>

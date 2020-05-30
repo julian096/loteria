@@ -1,17 +1,24 @@
 <template>
     <v-container>
-        <v-row no-gutters>
-            <v-col cols="3" v-for="card of cards" :key="card.id">
-                <v-img v-if="card.id !== 32" :src="card.path"></v-img>
-                <v-img v-else :src="card.path" aspect-ratio=".659"></v-img>
-            </v-col>
-        </v-row>
+        <p class="headline ml-12" v-if="playerName">Tabla de {{ playerName }}</p>
+        <v-card max-width="270">
+            <v-row no-gutters>
+                <v-col cols="3" v-for="card of cards" :key="card.id">
+                    <v-card v-if="card.id !== 32" :disabled="card.pass">
+                        <v-img :src="card.path"></v-img>
+                    </v-card>
+                    <v-card v-else :disabled="card.pass">
+                        <v-img :src="card.path" aspect-ratio=".659"></v-img>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-card>
     </v-container>
 </template>
 
 <script>
 export default {
     name: "MyTable",
-    props:['cards']
+    props:['cards','playerName']
 }
 </script>

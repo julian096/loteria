@@ -1,7 +1,5 @@
 <template>
-    <v-card width="300">
-        <v-img :src="path"></v-img>
-    </v-card>
+    <v-img :src="currentCard.path"></v-img>
 </template>
 
 <script>
@@ -10,8 +8,11 @@ import { mapState } from 'vuex'
 export default {
     name: "Card",
     props:['path'],
+    data: () => ({
+        reversePath: require('../assets/img/16.jpeg')
+    }),
     computed:{
-        ...mapState(['cardsToRun'])
+        ...mapState(['currentCard'])
     }
 }
 </script>

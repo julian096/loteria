@@ -23,6 +23,10 @@ Vue.use(VueRouter)
     path: '/game',
     name: 'Game',
     component: () => import('../views/Game')
+  },
+  {
+    path: "*",
+    redirect: "/"
   }
 ]
 
