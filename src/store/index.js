@@ -64,8 +64,6 @@ export default new Vuex.Store({
     cards: [
         {id: 1, pass: false, path: require('../assets/img/1.jpeg')},
         {id: 2, pass: false, path: require('../assets/img/2.jpeg')},
-        {id: 12, pass: false, path: require('../assets/img/12.jpeg')},
-        {id: 13, pass: false, path: require('../assets/img/13.jpeg')},
         {id: 3, pass: false, path: require('../assets/img/3.jpeg')},
         {id: 4, pass: false, path: require('../assets/img/4.jpeg')},
         {id: 5, pass: false, path: require('../assets/img/5.jpeg')},
@@ -75,6 +73,8 @@ export default new Vuex.Store({
         {id: 9, pass: false, path: require('../assets/img/9.jpeg')},
         {id: 10, pass: false, path: require('../assets/img/10.jpeg')},
         {id: 11, pass: false, path: require('../assets/img/11.jpeg')},
+        {id: 12, pass: false, path: require('../assets/img/12.jpeg')},
+        {id: 13, pass: false, path: require('../assets/img/13.jpeg')},
         {id: 14, pass: false, path: require('../assets/img/14.jpeg')},
         {id: 15, pass: false, path: require('../assets/img/15.jpeg')},
         {id: 16, pass: false, path: require('../assets/img/16.jpeg')},
@@ -122,17 +122,13 @@ export default new Vuex.Store({
     player1:{
       name: "",
       cards:[],
-      cardsPass:[]
+      victory: false
     },
     player2:{
       name: "",
       cards:[],
-      cardsPass:[]
-    },
-    victorys:[
-      [0,3,12,15]
-    ],
-    index:0
+      victory: false
+    }
   },
   mutations: {
     saveName(state, name){
@@ -152,10 +148,11 @@ export default new Vuex.Store({
       state.cont = 0;
       if(numberPlayer == 1){
         state.player1.cards = [];
+        state.cards = state.cardsToRun;
       } else if(numberPlayer == 2){
         state.player2.cards = [];
+        state.cards = state.cardsToRun;
       }
-      state.cards = state.cardsToRun;
     },
     nextPlayer(state){
       state.cont = 0;
@@ -176,9 +173,176 @@ export default new Vuex.Store({
       state.cardsToRun = state.cardsToRun.filter( card => card.id !== state.currentCard.id );
     },
     validVictory(state){
-      state.index = state.player1.cards.findIndex(card => card.id === state.currentCard.id);
-      if(state.index != -1){
-        state.player1.cardsPass.push(state.index)
+      // Victoria horizontal
+      if(state.player1.cards[0].pass == true && state.player1.cards[1].pass == true && state.player1.cards[2].pass == true && state.player1.cards[3].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[4].pass == true && state.player1.cards[5].pass == true && state.player1.cards[6].pass == true && state.player1.cards[7].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[8].pass == true && state.player1.cards[9].pass == true && state.player1.cards[10].pass == true && state.player1.cards[11].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[12].pass == true && state.player1.cards[13].pass == true && state.player1.cards[14].pass == true && state.player1.cards[15].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria vertical
+      if(state.player1.cards[0].pass == true && state.player1.cards[4].pass == true && state.player1.cards[8].pass == true && state.player1.cards[12].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[1].pass == true && state.player1.cards[5].pass == true && state.player1.cards[9].pass == true && state.player1.cards[13].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[2].pass == true && state.player1.cards[6].pass == true && state.player1.cards[10].pass == true && state.player1.cards[14].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[3].pass == true && state.player1.cards[7].pass == true && state.player1.cards[11].pass == true && state.player1.cards[15].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria diagonal
+      if(state.player1.cards[0].pass == true && state.player1.cards[5].pass == true && state.player1.cards[10].pass == true && state.player1.cards[15].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[3].pass == true && state.player1.cards[6].pass == true && state.player1.cards[9].pass == true && state.player1.cards[12].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria 4 esquinas
+      if(state.player1.cards[0].pass == true && state.player1.cards[3].pass == true && state.player1.cards[12].pass == true && state.player1.cards[15].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria cuadro
+      if(state.player1.cards[0].pass == true && state.player1.cards[1].pass == true && state.player1.cards[4].pass == true && state.player1.cards[5].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[2].pass == true && state.player1.cards[3].pass == true && state.player1.cards[6].pass == true && state.player1.cards[7].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[8].pass == true && state.player1.cards[9].pass == true && state.player1.cards[12].pass == true && state.player1.cards[13].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[10].pass == true && state.player1.cards[11].pass == true && state.player1.cards[14].pass == true && state.player1.cards[15].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[5].pass == true && state.player1.cards[6].pass == true && state.player1.cards[9].pass == true && state.player1.cards[10].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[1].pass == true && state.player1.cards[2].pass == true && state.player1.cards[5].pass == true && state.player1.cards[6].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[9].pass == true && state.player1.cards[10].pass == true && state.player1.cards[13].pass == true && state.player1.cards[14].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[4].pass == true && state.player1.cards[5].pass == true && state.player1.cards[8].pass == true && state.player1.cards[9].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player1.cards[6].pass == true && state.player1.cards[7].pass == true && state.player1.cards[10].pass == true && state.player1.cards[11].pass == true){
+        state.player1.victory = true;
+        state.cardsToRun = [];
+      }
+
+      // Victoria horizontal
+      if(state.player2.cards[0].pass == true && state.player2.cards[1].pass == true && state.player2.cards[2].pass == true && state.player2.cards[3].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[4].pass == true && state.player2.cards[5].pass == true && state.player2.cards[6].pass == true && state.player2.cards[7].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[8].pass == true && state.player2.cards[9].pass == true && state.player2.cards[10].pass == true && state.player2.cards[11].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[12].pass == true && state.player2.cards[13].pass == true && state.player2.cards[14].pass == true && state.player2.cards[15].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria vertical
+      if(state.player2.cards[0].pass == true && state.player2.cards[4].pass == true && state.player2.cards[8].pass == true && state.player2.cards[12].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[1].pass == true && state.player2.cards[5].pass == true && state.player2.cards[9].pass == true && state.player2.cards[13].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[2].pass == true && state.player2.cards[6].pass == true && state.player2.cards[10].pass == true && state.player2.cards[14].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[3].pass == true && state.player2.cards[7].pass == true && state.player2.cards[11].pass == true && state.player2.cards[15].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria diagonal
+      if(state.player2.cards[0].pass == true && state.player2.cards[5].pass == true && state.player2.cards[10].pass == true && state.player2.cards[15].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[3].pass == true && state.player2.cards[6].pass == true && state.player2.cards[9].pass == true && state.player2.cards[12].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria 4 esquinas
+      if(state.player2.cards[0].pass == true && state.player2.cards[3].pass == true && state.player2.cards[12].pass == true && state.player2.cards[15].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      // victoria cuadro
+      if(state.player2.cards[0].pass == true && state.player2.cards[1].pass == true && state.player2.cards[4].pass == true && state.player2.cards[5].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[2].pass == true && state.player2.cards[3].pass == true && state.player2.cards[6].pass == true && state.player2.cards[7].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[8].pass == true && state.player2.cards[9].pass == true && state.player2.cards[12].pass == true && state.player2.cards[13].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[10].pass == true && state.player2.cards[11].pass == true && state.player2.cards[14].pass == true && state.player2.cards[15].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[5].pass == true && state.player2.cards[6].pass == true && state.player2.cards[9].pass == true && state.player2.cards[10].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[1].pass == true && state.player2.cards[2].pass == true && state.player2.cards[5].pass == true && state.player2.cards[6].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[9].pass == true && state.player2.cards[10].pass == true && state.player2.cards[13].pass == true && state.player2.cards[14].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[4].pass == true && state.player2.cards[5].pass == true && state.player2.cards[8].pass == true && state.player2.cards[9].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
+      }
+      if(state.player2.cards[6].pass == true && state.player2.cards[7].pass == true && state.player2.cards[10].pass == true && state.player2.cards[11].pass == true){
+        state.player2.victory = true;
+        state.cardsToRun = [];
       }
     }
   }
